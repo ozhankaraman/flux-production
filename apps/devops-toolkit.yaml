@@ -1,0 +1,21 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: devops-toolkit-production
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: helm
+      sourceRef:
+        kind: GitRepository
+        name: devops-toolkit
+  interval: 30s
+  targetNamespace: production
+  values:
+    image:
+      tag: 2.9.17
+    ingress:
+      host: devops-toolkit.192.168.44.100.xip.io
+
